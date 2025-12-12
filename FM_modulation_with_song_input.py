@@ -92,7 +92,6 @@ demod_clean = sosfiltfilt(sos_high, demod_filtered)
 #-------------------------------------------------------------------
 #downsample back to the original rate to convert back to .wav
 demod_final = resample(demod_clean, num_samples_original)
-x_ref_final = resample(x_upsampled, num_samples_original)
 
 #normalize the volume to prevent clipping
 def safe_normalize(sig):
@@ -100,12 +99,7 @@ def safe_normalize(sig):
     if m > 0:
         return sig / m
     return sig
-
 demod_final = safe_normalize(demod_final) * 4
-x_ref_final = safe_normalize(x_ref_final) * 4
-
-# Write WAVs
-write("original_signal_fm.wav", fs_source, np.int16(x_ref_final * 32767))
 write("demodulated_fm.wav", fs_source, np.int16(demod_final * 32767))
 
 
@@ -117,7 +111,7 @@ plt.figure(figsize=(10, 8))
 # Spectrogram Input
 plt.subplot(2, 1, 1)
 skip = int(fs_source * 0.01)
-plt.specgram(x_ref_final[skip:], Fs=fs_source, NFFT=1024, noverlap=512, cmap='inferno', vmin=-100)
+plt.specgram(x[skip:], Fs=fs_source, NFFT=1024, noverlap=512, cmap='inferno', vmin=-100)
 plt.title(f"Original Input Spectrogram")
 plt.ylabel("Frequency (Hz)")
 plt.ylim(0, 20000)

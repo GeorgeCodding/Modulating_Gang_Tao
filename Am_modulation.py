@@ -104,7 +104,7 @@ plt.show(block=False)
 
 
 #-------------------------------------------------------------------
-# STEP 4: Lowpass filtering
+# STEP 4: Lowpass filtering + Envelope Detector Circuit
 #-------------------------------------------------------------------
 
 #final am step: demodulation using envelope detector circuit (diode + low pass filter combo)

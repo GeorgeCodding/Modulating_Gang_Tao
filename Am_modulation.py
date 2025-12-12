@@ -92,7 +92,7 @@ carrier_wave = np.cos(2 * np.pi * fc * t)
 #amplitude of 1 for this demo
 am_signal = (1 + x) * carrier_wave
 
-
+"""
 plt.figure(figsize=(10,4))
 plt.plot(t[:1000], am_signal[:1000])
 plt.title("AM Modulated Signal")
@@ -101,7 +101,7 @@ plt.ylabel("Amplitude")
 plt.grid(True, alpha=0.6)
 plt.show(block=False)
 # plt.close()
-
+"""
 
 #-------------------------------------------------------------------
 # STEP 4: Lowpass filtering + Envelope Detector Circuit
@@ -166,7 +166,7 @@ plt.show(block=False)
 # STEP 5: Export to "output_results" Folder
 #-------------------------------------------------------------------
 
-output_folder = "output_results"
+output_folder = "output_results_AM"
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
@@ -176,24 +176,23 @@ x_out = np.clip(x, -1.0, 1.0)
 demod_out = np.clip(demod_am, -1.0, 1.0)
 
 write(os.path.join(output_folder, "original_resampled.wav"), int(fs), np.int16(x_out * 32767))
-write(os.path.join(output_folder, "demodulated_output.wav"), int(fs), np.int16(demod_out * 32767))
+write(os.path.join(output_folder, "demodulated_output_AM.wav"), int(fs), np.int16(demod_out * 32767))
 
 #-------------------------------------------------------------------
 # FINAL PLOTTING: Save and Display
 #-------------------------------------------------------------------
 
 # Slice for plotting (viewing a segment of the wave)
-# We look at 2000 samples to see the carrier waves clearly
-start = 10000
-end = 12000
+start = 1000
+end = 1000000
 
-
+"""
 # Save and Show
 save_path1 = os.path.join(output_folder, "1_AM_Modulated_Signal.png")
 plt.savefig(save_path1)
 plt.show(block=False)
 plt.pause(0.1)
-
+"""
 
 # --- IMAGE 2: The Grid Summary ---
 plt.figure(figsize=(14, 10))
@@ -207,7 +206,7 @@ plt.grid(True, alpha=0.6)
 
 # 2. Top Right: Input Spectrogram
 plt.subplot(2, 2, 2)
-plt.specgram(x, Fs=fs, NFFT=2048, noverlap=1024, cmap='inferno')
+plt.specgram(x, Fs=fs, NFFT=2048, noverlap=1024, cmap='inferno', vmin=-60)
 plt.title("Spectrogram of Input")
 plt.ylabel("Frequency (Hz)")
 plt.ylim(0, 4000)

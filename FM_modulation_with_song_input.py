@@ -100,16 +100,11 @@ if not os.path.exists(output_folder):
 
 demod_final = resample(demod_clean, num_samples_original)
 
-#normalize the volume to prevent clipping
-def safe_normalize(sig):
-    m = np.max(np.abs(sig))
-    if m > 0:
-        return sig / m
-    return sig
-demod_final = safe_normalize(demod_final) * 4
+demod_final = demod_final / kf
 
 # 1. Define x_out (Clip the original signal 'x' to be safe for saving)
 x_out = np.clip(x, -1.0, 1.0)
+demod_final = np.clip(demod_final, -1.0, 1.0)
 
 write(os.path.join(output_folder, filename), fs_source, np.int16(x_out * 32767))
 write(os.path.join(output_folder, "demodulated_output_fm.wav"), fs_source, np.int16(demod_final * 32767))

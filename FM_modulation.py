@@ -127,7 +127,7 @@ plt.figure(figsize=(12, 10))
 #spectrogram of original input
 plt.subplot(2, 1, 1)
 #NFFT determines frequency resolution -- higher = finer frequency lines.
-plt.specgram(x, Fs=fs, NFFT=2048, noverlap=1024, cmap='inferno')
+plt.specgram(x, Fs=fs, NFFT=2048, noverlap=1024, cmap='inferno', vmin=-60)
 plt.title("Spectrogram of Original Input (600 Hz Pure Tone)")
 plt.ylabel("Frequency (Hz)")
 plt.colorbar(label="Intensity (dB)")

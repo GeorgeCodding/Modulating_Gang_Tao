@@ -106,7 +106,7 @@ demod_final = demod_final / kf
 x_out = np.clip(x, -1.0, 1.0)
 demod_final = np.clip(demod_final, -1.0, 1.0)
 
-write(os.path.join(output_folder, filename), fs_source, np.int16(x_out * 32767))
+write(os.path.join(output_folder, "original_resampled_fm"), fs_source, np.int16(x_out * 32767))
 write(os.path.join(output_folder, "demodulated_output_fm.wav"), fs_source, np.int16(demod_final * 32767))
 
 

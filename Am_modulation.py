@@ -37,7 +37,7 @@ t = np.linspace(0, duration, len(x), endpoint=False)
 # 5. Define Max Audio Frequency (Critical for Filter Logic)
 # Your old code used 'f_in' (600) to calculate the filter cutoff later.
 # Since we now have complex audio, we estimate the max voice/music freq.
-f_in = 5000  # Estimate: 3kHz is typical for AM radio voice bandwidth
+
 
 #-------------------------------------------------------------------
 # STEP 1: Set up the parameters
@@ -88,11 +88,8 @@ envelope = np.abs(am_signal)
 
 #lowpass cutoff frequency must be > message (600 Hz, in this case) but < carrier (5000 Hz)
 #this if-else block tries to keep the cutoff frequency as low as possible so as to eliminate noisy harmonics
-if (f_in*2 < .8*fc):
-    lpf_cutoff = f_in*1.5
-else:
-    lpf_cutoff = (fc-f_in)/2
-lpf_filter_order = 8 #8!
+lpf_cutoff = 5000
+lpf_filter_order = 6
 
 #create the butterworth filter!
 #normalized cutoff = cutoff/nyquist
